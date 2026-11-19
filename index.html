@@ -22,7 +22,6 @@
   }
   header h1 { font-size: 1.8em; text-shadow: 0 3px 10px rgba(0,0,0,.4); }
 
-  /* ===== شريط الفريقين ===== */
   .teams-bar {
     display: flex; justify-content: center; gap: 15px;
     margin: 15px auto; flex-wrap: wrap; padding: 0 15px;
@@ -45,27 +44,17 @@
   .team-card .pos { font-size: 1.5em; font-weight: bold; color: #ffd54f; }
   .team-card .label { font-size: .75em; color: #e1bee7; }
 
-  /* ===== اللوحة ===== */
-  .board-wrap {
-    max-width: 800px; margin: 15px auto; padding: 0 12px;
-  }
+  .board-wrap { max-width: 800px; margin: 15px auto; padding: 0 12px; }
   .board {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 6px;
-    background: rgba(255,255,255,.08);
-    padding: 10px; border-radius: 18px;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px;
+    background: rgba(255,255,255,.08); padding: 10px; border-radius: 18px;
     border: 1px solid rgba(255,255,255,.2);
   }
   .cell {
-    position: relative;
-    aspect-ratio: 1;
-    background: #fff;
-    border-radius: 10px;
+    position: relative; aspect-ratio: 1;
+    background: #fff; border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.6em; font-weight: bold;
-    color: #4a148c;
-    transition: .2s;
+    font-size: 1.6em; font-weight: bold; color: #4a148c; transition: .2s;
   }
   .cell .num { font-size: 1em; font-weight: bold; color: inherit; z-index: 1; }
   .cell.ladder { background: linear-gradient(145deg, #a5d6a7, #66bb6a); color: #fff; }
@@ -74,8 +63,7 @@
   .cell .tokens { position: absolute; bottom: 3px; left: 3px; display: flex; gap: 2px; }
   .token {
     width: 18px; height: 18px; border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,.4);
+    border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0,0,0,.4);
     font-size: .6em; display: flex; align-items: center; justify-content: center;
     transition: transform .15s;
   }
@@ -89,29 +77,47 @@
     display: flex; flex-direction: column; align-items: center; gap: 12px;
   }
   .dice-area {
-    display: flex; align-items: center; gap: 20px;
-    background: rgba(255,255,255,.1);
-    padding: 16px 24px; border-radius: 20px;
+    display: flex; align-items: center; gap: 15px;
+    background: rgba(255,255,255,.1); padding: 12px 20px; border-radius: 20px;
     border: 1px solid rgba(255,255,255,.25);
+    flex-wrap: wrap; justify-content: center;
   }
+
+  /* ===== النرد الكبير الواضح ===== */
   .dice {
-    width: 80px; height: 80px;
-    background: #fff; border-radius: 14px;
+    width: clamp(70px, 18vw, 120px);
+    height: clamp(70px, 18vw, 120px);
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border-radius: 18px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 2.5em; cursor: pointer;
-    box-shadow: 0 6px 0 #bbb, 0 8px 15px rgba(0,0,0,.4);
-    transition: transform .1s; user-select: none;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #bbb, 0 10px 20px rgba(0,0,0,.4);
+    transition: transform .1s;
+    user-select: none;
+    position: relative;
+    font-size: clamp(32px, 8vw, 56px);
+    font-weight: 900;
+    color: #4a148c;
+    border: 3px solid #ffd54f;
   }
   .dice:active { transform: translateY(4px); box-shadow: 0 2px 0 #bbb; }
-  .dice.rolling { animation: shake .5s infinite; }
+  .dice.rolling { animation: shake .4s infinite; }
   @keyframes shake {
-    0%, 100% { transform: rotate(0); }
-    25% { transform: rotate(-15deg); }
-    75% { transform: rotate(15deg); }
+    0%, 100% { transform: rotate(0) scale(1); }
+    25% { transform: rotate(-12deg) scale(1.05); }
+    75% { transform: rotate(12deg) scale(1.05); }
   }
-  .dice-info { text-align: center; }
-  .dice-info .turn { font-size: 1.1em; font-weight: bold; margin-bottom: 4px; }
-  .dice-info .result { font-size: .9em; color: #e1bee7; min-height: 20px; }
+  .dice .dice-number {
+    font-size: 1em;
+    font-weight: 900;
+    color: #4a148c;
+    line-height: 1;
+  }
+  .dice.rolling .dice-number { color: #6a1b9a; }
+
+  .dice-info { text-align: center; min-width: 160px; }
+  .dice-info .turn { font-size: 1.05em; font-weight: bold; margin-bottom: 4px; }
+  .dice-info .result { font-size: .9em; color: #e1bee7; min-height: 22px; }
 
   .reset-btn {
     padding: 10px 24px; border: none; border-radius: 20px;
@@ -121,7 +127,6 @@
   }
   .reset-btn:hover { background: rgba(255,255,255,.3); }
 
-  /* ===== شاشة السؤال ===== */
   .overlay {
     position: fixed; inset: 0; background: rgba(10,10,30,.9);
     backdrop-filter: blur(8px);
@@ -185,26 +190,18 @@
 
   .feedback { text-align: center; font-weight: bold; font-size: 1.05em; margin-top: 12px; min-height: 24px; }
 
-  /* ===== تعليمات اللعبة ===== */
-  .instructions {
-    max-width: 800px; margin: 25px auto 0; padding: 0 15px;
-  }
+  .instructions { max-width: 800px; margin: 25px auto 0; padding: 0 15px; }
   .instructions-box {
     background: rgba(255,255,255,.1);
     border: 1px solid rgba(255,255,255,.25);
-    border-radius: 18px; padding: 20px 22px;
-    backdrop-filter: blur(6px);
+    border-radius: 18px; padding: 20px 22px; backdrop-filter: blur(6px);
   }
   .instructions-box h2 {
     font-size: 1.2em; margin-bottom: 14px;
     color: #ffd54f; display: flex; align-items: center; gap: 8px;
   }
-  .instructions-box ol {
-    padding-right: 20px; display: flex; flex-direction: column; gap: 10px;
-  }
-  .instructions-box li {
-    font-size: .95em; line-height: 1.6; color: #f0e6ff;
-  }
+  .instructions-box ol { padding-right: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .instructions-box li { font-size: .95em; line-height: 1.6; color: #f0e6ff; }
   .instructions-box li b { color: #ffd54f; }
   .instructions-box .note {
     margin-top: 14px; padding-top: 12px;
@@ -212,7 +209,6 @@
     font-size: .88em; color: #e1bee7; line-height: 1.6;
   }
 
-  /* ===== شاشة الفوز ===== */
   .win-screen {
     position: fixed; inset: 0; background: rgba(10,10,30,.92);
     display: none; align-items: center; justify-content: center;
@@ -238,8 +234,8 @@
     .cell { font-size: 1.2em; border-radius: 8px; }
     .cell .icon { font-size: 1em; }
     .token { width: 14px; height: 14px; }
-    .dice { width: 65px; height: 65px; font-size: 2em; }
     header h1 { font-size: 1.4em; }
+    .dice-area { padding: 10px 14px; gap: 10px; }
   }
 </style>
 </head>
@@ -269,7 +265,9 @@
 
 <div class="controls">
   <div class="dice-area">
-    <div class="dice" id="dice">🎲</div>
+    <div class="dice" id="dice">
+      <span class="dice-number" id="diceNumber">🎲</span>
+    </div>
     <div class="dice-info">
       <div class="turn" id="turnText">🔴 دور الفريق الأحمر</div>
       <div class="result" id="diceResult">دوس على النرد 🎲</div>
@@ -278,7 +276,6 @@
   <button class="reset-btn" onclick="resetGame()">🔄 لعبة جديدة</button>
 </div>
 
-<!-- تعليمات اللعبة -->
 <div class="instructions">
   <div class="instructions-box">
     <h2>📖 تعليمات اللعبة</h2>
@@ -286,8 +283,8 @@
       <li><b>الفريقين:</b> فيه فريقين – 🔴 الفريق الأحمر و 🔵 الفريق الأزرق. كل فريق عنده قطعة على اللوحة.</li>
       <li><b>البداية:</b> الفريق الأحمر يبدأ الأول، وبعد كل دور الدور ينتقل للفريق التاني.</li>
       <li><b>النرد:</b> الفريق بيدوس على 🎲 النرد، وبعد اللف بيطلع رقم من 1 لـ 6.</li>
-      <li><b>السؤال:</b> بعد ما يظهر رقم النرد، بيظهر سؤال عن الصوم مع 👇 3 إجابات اختيارية.</li>
-      <li><b>التايمر:</b> عند كل سؤال ⏱️ 10 ثواني بس للإجابة. لازم تختار قبل ما الوقت يخلص!</li>
+      <li><b>السؤال:</b> بعد ما يظهر رقم النرد، بيظهر سؤال مع 3 إجابات اختيارية.</li>
+      <li><b>التايمر:</b> عند كل سؤال ⏱️ <b>30 ثانية</b> للإجابة. لازم تختار قبل ما الوقت يخلص!</li>
       <li><b>الإجابة الصح:</b> ✅ لو اختار الإجابة الصح، الفريق بيتحرك <b>لقدام</b> بعدد النرد.</li>
       <li><b>الإجابة الغلط:</b> ❌ لو اختار غلط (أو الوقت خلص)، الفريق بيرجع <b>لورا</b> بعدد النرد.</li>
       <li><b>🪜 السلم:</b> لو الفريق وقف على خانة سلم، بيطلع <b>5 خطوات لفوق</b>.</li>
@@ -304,7 +301,7 @@
   <div class="q-box">
     <div class="timer-wrap">
       <div class="timer-bar-bg"><div class="timer-bar" id="timerBar"></div></div>
-      <div class="timer-text" id="timerText">10</div>
+      <div class="timer-text" id="timerText">30</div>
     </div>
     <div class="q-turn-badge red" id="qTurnBadge">🔴 الفريق الأحمر</div>
     <div class="q-text" id="qText"></div>
@@ -327,44 +324,39 @@
    بيانات اللعبة
    ============================================================ */
 const TOTAL_CELLS = 30;
-const ladders = [3, 8, 15];
-const snakes = [22, 27];
-const QUESTION_TIME = 10;
+const ladders = [5, 11, 19];
+const snakes = [14, 23];
+const QUESTION_TIME = 30;
 
 /* ============================================================
-   أسئلة الصوم
+   الأسئلة (25 سؤال)
    ============================================================ */
 const questions = [
-  { q: "صوم الميلاد بييجي قبل عيد إيه؟", a: ["عيد الميلاد", "عيد القيامة", "عيد الغطاس"], c: 0 },
-  { q: "صوم الميلاد بيستمر كام يوم؟", a: ["43 يوم", "10 أيام", "55 يوم"], c: 0 },
-  { q: "صوم يونان كم يوم؟", a: ["3 أيام", "40 يوم", "7 أيام"], c: 0 },
-  { q: "مين اللي بلعه الحوت؟", a: ["يونان النبي", "موسى", "داود"], c: 0 },
-  { q: "الصوم الكبير بيستمر كام يوم؟", a: ["55 يوم", "3 أيام", "7 أيام"], c: 0 },
-  { q: "الصوم الكبير بيخلص بعيد إيه؟", a: ["عيد القيامة", "عيد الميلاد", "عيد الغطاس"], c: 0 },
-  { q: "مين اللي صام 40 يوم في البرية؟", a: ["السيد المسيح", "نوح", "يونان"], c: 0 },
-  { q: "صوم العذراء بيستمر كام يوم؟", a: ["15 يوم", "3 أيام", "55 يوم"], c: 0 },
-  { q: "صوم العذراء لمين؟", a: ["مريم العذراء", "الرسل", "الملائكة"], c: 0 },
-  { q: "المسيح اتولد في مدينة إيه؟", a: ["بيت لحم", "الناصرة", "أورشليم"], c: 0 },
-  { q: "مين أم السيد المسيح؟", a: ["مريم العذراء", "مارتا", "أليصابات"], c: 0 },
-  { q: "المجوس جابوا للمسيح إيه؟", a: ["ذهب ولبان ومر", "أكل", "هدوم"], c: 0 },
-  { q: "ربنا بعت يونان يكرز في مدينة إيه؟", a: ["نينوى", "أورشليم", "ترشيش"], c: 0 },
-  { q: "أهل نينوى عملوا إيه لما سمعوا؟", a: ["تابوا وصاموا", "زعلوا", "سافروا"], c: 0 },
-  { q: "الصوم الكبير بيبدأ يوم إيه؟", a: ["اثنين الرماد", "الأحد", "الجمعة"], c: 0 },
-  { q: "في الصوم بنصلي أكتر ولا أقل؟", a: ["أكتر", "أقل", "زي ما هو"], c: 0 },
-  { q: "الأكل المسموح في الصوم؟", a: ["أكل نباتي", "لحمة", "فراخ"], c: 0 },
-  { q: "الصوم بيعلمنا إيه؟", a: ["الصبر والطاعة", "الكسل", "الزعل"], c: 0 },
-  { q: "في الصوم بنسامح الناس؟", a: ["أيوه", "لا", "مش لازم"], c: 0 },
-  { q: "الصوم بيقربنا من مين؟", a: ["ربنا", "التلفزيون", "اللعب"], c: 0 },
-  { q: "صوم يونان بيعلمنا إيه؟", a: ["التوبة والطاعة", "الهروب", "الكسل"], c: 0 },
-  { q: "مريم العذراء كانت من مدينة إيه؟", a: ["الناصرة", "بيت لحم", "مصر"], c: 0 },
-  { q: "العذراء مريم قالت إيه للملاك؟", a: ["ها أنا أمة الرب", "لا", "مش عارفة"], c: 0 },
-  { q: "الصوم الكبير فيه كم أسبوع؟", a: ["7 أسابيع", "3 أسابيع", "10 أسابيع"], c: 0 },
-  { q: "في الصوم بنقرأ إيه أكتر؟", a: ["الإنجيل", "القصص", "المجلات"], c: 0 },
-  { q: "صوم الميلاد بيعلمنا إيه؟", a: ["الاستعداد والفرح", "الزعل", "الكسل"], c: 0 },
-  { q: "عيد الميلاد بنحتفل بيه إمتى؟", a: ["7 يناير", "1 يونيو", "25 مارس"], c: 0 },
-  { q: "الصوم معناه إننا نبعد عن إيه؟", a: ["الخطية", "اللعب", "المدرسة"], c: 0 },
-  { q: "يونان قعد في بطن الحوت كام يوم؟", a: ["3 أيام و3 ليالي", "40 يوم", "يوم واحد"], c: 0 },
-  { q: "الصوم بيقوي إيه؟", a: ["الروح", "الجسم", "الشغل"], c: 0 }
+  { q: "من الذي صام 40 يومًا في البرية؟", a: ["موسى النبي", "السيد المسيح", "يونان النبي"], c: 1 },
+  { q: "من الذي صام ثلاثة أيام بدون أكل أو شرب؟", a: ["أستير", "داود", "إيليا"], c: 0 },
+  { q: "ما الصوم الذي يسبق عيد القيامة؟", a: ["صوم الميلاد", "الصوم الكبير", "صوم الرسل"], c: 1 },
+  { q: "وُلد السيد المسيح في مدينة...", a: ["الناصرة", "أورشليم", "بيت لحم"], c: 2 },
+  { q: "الملاك الذي بشّر السيدة العذراء هو...", a: ["ميخائيل", "جبرائيل", "رافائيل"], c: 1 },
+  { q: "الذي أرشد المجوس إلى مكان طفل يسوع هو...", a: ["النجم", "الملاك", "الرعاة"], c: 0 },
+  { q: "يبدأ الصوم الكبير بأسبوع...", a: ["الآلام", "الاستعداد", "الرفاع"], c: 2 },
+  { q: "العيد الذي يأتي بعد الصوم الكبير هو عيد...", a: ["الميلاد", "القيامة", "الغطاس"], c: 1 },
+  { q: "دخل السيد المسيح أورشليم راكبًا على...", a: ["حصان", "جمل", "جحش"], c: 2 },
+  { q: "اسم الأحد الذي يبدأ به أسبوع الآلام هو...", a: ["أحد الشعانين", "أحد القيامة", "أحد التناصير"], c: 0 },
+  { q: "اسم الجبل الذي صُلب عليه السيد المسيح هو...", a: ["جبل سيناء", "جبل الجلجثة", "جبل الزيتون"], c: 1 },
+  { q: "أين دُعي التلاميذ مسيحيين أولًا؟", a: ["أورشليم", "مصر", "أنطاكية"], c: 2 },
+  { q: "اسم عيد حلول الروح القدس هو...", a: ["عيد العنصرة", "عيد الميلاد", "عيد الغطاس"], c: 0 },
+  { q: "من هو أول الشهداء؟", a: ["مارجرجس", "القديس إسطفانوس", "القديس مرقس"], c: 1 },
+  { q: "من الرسول الذي كان عشارًا؟", a: ["متى", "بطرس", "يوحنا"], c: 0 },
+  { q: "من الرسول الذي بشّر الأمم؟", a: ["أندراوس", "بولس", "توما"], c: 1 },
+  { q: "من الذي خان السيد المسيح؟", a: ["بطرس", "يوحنا", "يهوذا الإسخريوطي"], c: 2 },
+  { q: "من الذي أنكر السيد المسيح ثلاث مرات؟", a: ["بطرس", "توما", "متى"], c: 0 },
+  { q: "من كان يعمل صياد سمك؟", a: ["متى", "بطرس", "بولس"], c: 1 },
+  { q: "من هي الملكة التي صامت ثلاثة أيام لإنقاذ شعبها؟", a: ["أستير", "مريم", "حنة"], c: 0 },
+  { q: "أستير كانت متجوزة من ملك إيه؟", a: ["ملك مصر", "الملك أحشويروش", "ملك بابل"], c: 1 },
+  { q: "مين اللي ربّى أستير؟", a: ["مردخاي", "أبوها", "أخوها"], c: 0 },
+  { q: "أستير كانت من الشعب إيه؟", a: ["المصريين", "اليهود", "الرومان"], c: 1 },
+  { q: "مين اللي خطط لقتل اليهود في قصة أستير؟", a: ["هامان", "مردخاي", "الملك"], c: 0 },
+  { q: "أستير صامت كام يوم قبل ما تروح للملك؟", a: ["3 أيام", "7 أيام", "40 يوم"], c: 0 }
 ];
 
 /* ============================================================
@@ -440,9 +432,10 @@ function updateTokens() {
 }
 
 /* ============================================================
-   حجر النرد
+   حجر النرد – الرقم الكبير واضح
    ============================================================ */
 const diceEl = document.getElementById('dice');
+const diceNumber = document.getElementById('diceNumber');
 const diceResult = document.getElementById('diceResult');
 
 diceEl.onclick = () => {
@@ -455,23 +448,27 @@ diceEl.onclick = () => {
 
   let rollCount = 0;
   const rollInterval = setInterval(() => {
-    const faces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
-    diceEl.textContent = faces[Math.floor(Math.random() * 6)];
+    // نعرض أرقام عشوائية كبيرة
+    diceNumber.textContent = Math.floor(Math.random() * 6) + 1;
     rollCount++;
-    if (rollCount > 8) {
+    if (rollCount > 10) {
       clearInterval(rollInterval);
       finishRoll();
     }
-  }, 80);
+  }, 70);
 };
 
 function finishRoll() {
   const dice = Math.floor(Math.random() * 6) + 1;
-  const faces = ['⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
 
-  diceEl.textContent = faces[dice - 1];
+  // نعرض الرقم الكبير
+  diceNumber.textContent = dice;
   diceEl.classList.remove('rolling');
   diceResult.textContent = `🎯 طلع ${dice}! استعد للسؤال...`;
+
+  // نكبر الرقم شوية للتأكيد
+  diceNumber.style.transform = 'scale(1.2)';
+  setTimeout(() => { diceNumber.style.transform = 'scale(1)'; }, 300);
 
   setTimeout(() => {
     diceResult.textContent = `🎯 طلع ${dice}! جاوب السؤال 👇`;
@@ -539,10 +536,10 @@ function startTimer() {
     timerBar.style.width = percent + '%';
     timerText.textContent = Math.ceil(game.timeLeft);
 
-    if (game.timeLeft <= 3) {
+    if (game.timeLeft <= 10) {
       timerBar.className = 'timer-bar danger';
       timerText.style.color = '#ff5252';
-    } else if (game.timeLeft <= 6) {
+    } else if (game.timeLeft <= 20) {
       timerBar.className = 'timer-bar warning';
       timerText.style.color = '#ffc107';
     } else {
@@ -756,7 +753,7 @@ function resetGame() {
   game.rolling = false;
   game.answered = false;
   shuffleQuestions();
-  diceEl.textContent = '🎲';
+  diceNumber.textContent = '🎲';
   diceResult.textContent = 'دوس على النرد 🎲';
   document.getElementById('winScreen').classList.remove('show');
   overlay.classList.remove('show');
